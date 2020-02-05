@@ -17,6 +17,7 @@
     // Prepeare and check new password
     $new_password = trim($_POST['password1']);
 	$verify_password = trim($_POST['password2']);
+
 	if (!empty($new_password)) {
         if (($new_password != $verify_password) ||
 			( $password == $new_password ))
@@ -27,10 +28,12 @@
 	} else {
 			$errors[] = 'You did not enter a new password.';
     }
+
 	if (empty($errors)) { // If everything's OK.              
 try {
+
 	 // Check that the user has entered the right email address/password combination:
-    $query = "SELECT userid, password FROM users WHERE ( email=? )";
+    $query = "SELECT user_id, password FROM users WHERE ( email=? )";
 	$q = mysqli_stmt_init($dbcon);                                 
     mysqli_stmt_prepare($q, $query);
     // use prepared statement to insure that only text is inserted
@@ -38,15 +41,15 @@ try {
     mysqli_stmt_bind_param($q, 's', $email);
      // execute query
     mysqli_stmt_execute($q);
-
 	$result = mysqli_stmt_get_result($q);
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+    
     if ((mysqli_num_rows($result) == 1)
-          && (password_verify($password, $row['password'])))
+          && (password_verify($password, $row['password'])))  //password_verify is PHP API
 		{	// Found one record		
 	    // Change the password in the database...
 	    // Hash password current 60 characters but can increase
-	    $hashed_passcode = password_hash($new_password, PASSWORD_DEFAULT);            
+	    $hashed_passcode = password_hash($new_password, PASSWORD_DEFAULT);        //password_hash() is PHP API      
 		// Make the query:                                               
        $query = "UPDATE users SET password=? WHERE email=?";
 	   $q = mysqli_stmt_init($dbcon);                                 
@@ -56,6 +59,7 @@ try {
        mysqli_stmt_bind_param($q, 'ss', $hashed_passcode, $email);
        // execute query
        mysqli_stmt_execute($q);
+        
        if (mysqli_stmt_affected_rows($q) == 1) {	// one row updated
            // Echo a message
           header ("location: password-thanks.php"); 
@@ -75,6 +79,7 @@ try {
 		    exit();
 		 }
     } else { // Invalid email address/password combination.
+        
 		$errorstring = 'Error! <br /> ';
         $errorstring .= 'The email address and/or password do not match those on file.';
 	    $errorstring .= " Please try again.";
