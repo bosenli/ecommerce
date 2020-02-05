@@ -16,7 +16,7 @@
     
         </div>
         <div class="col-sm-8 text-center">
-        <h2>Thank you for registering</h2>
+        <h2>欢迎注册</h2>
 On the Home Page, you will now be able to login and add new quotes to the message board.
 <!-- login does not yet work, nut will in the next chapter -->
 

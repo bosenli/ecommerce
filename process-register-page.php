@@ -28,7 +28,6 @@
 	} else {
 		$errors[] = 'You forgot to enter your password.';
 	}
-
 	if (empty($errors)) { // If everything's OK.              #5
 try {
 	// Register the user in the database...

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <?php include('head.php');?>
+
     </head>
 <body>
 <div class="container" style="margin-top:30px">
@@ -13,7 +14,7 @@
     <div class="row">
     <!-- Left-side Column Menu Section -->
         <div class="col-sm-2">
-    
+        <a href="register-view-users.php">view user</a>
         </div>
         <div class="col-sm-8">
         <?php include('carousel_ad.php'); ?>
