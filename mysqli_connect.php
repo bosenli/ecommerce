@@ -8,3 +8,4 @@ Define ('DB_NAME', 'ecommerce');
 $dbcon = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 // Set the encoding...optional but recommended
 mysqli_set_charset($dbcon, 'utf8');
+?>
